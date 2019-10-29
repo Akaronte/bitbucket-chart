@@ -1,0 +1,18 @@
+{{- if .Values.persistence.enabled -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "bitbucket.fullname" . }}-bitbucket
+  labels:
+    app: {{ template "bitbucket.name" . }}
+    chart: {{ template "bitbucket.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.bitbucket.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.bitbucket.size | quote }}
+  {{ include "bitbucket.storageClass" . }}
+{{- end -}}
