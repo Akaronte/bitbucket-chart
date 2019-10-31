@@ -22,6 +22,21 @@ service:
 #    memory: 512Mi
 #    cpu: 300m
 
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 300
+  periodSeconds: 10
+  timeoutSeconds: 300
+  failureThreshold: 150
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 300
+  failureThreshold: 60
+  successThreshold: 1
+
 ingress:
   enabled: true
   annotations: { "kubernetes.io/ingress.class": "nginx", "kubernetes.io/tls-acme": "false" }

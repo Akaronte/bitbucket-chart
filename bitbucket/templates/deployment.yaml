@@ -28,6 +28,28 @@ spec:
             - name: http
               containerPort: 7990
               protocol: TCP
+          {{- if .Values.livenessProbe.enabled }}
+              livenessProbe:
+                httpGet:
+                  path: /status
+                  port: 7990
+                initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+                periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+                timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+                successThreshold: {{ .Values.livenessProbe.successThreshold }}
+                failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+              {{- end }}
+              {{- if .Values.readinessProbe.enabled }}
+              readinessProbe:
+                httpGet:
+                  path: /status
+                  port: 7990
+                initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+                periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+                timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+                successThreshold: {{ .Values.readinessProbe.successThreshold }}
+                failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+              {{- end }}
           volumeMounts:
             - name: {{ template "bitbucket.fullname" . }}-bitbucket-volume
               mountPath: "/var/atlassian/application-data/bitbucket"
