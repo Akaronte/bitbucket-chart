@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: atlassian/bitbucket-server
+  repository: akaronte/bitbucket-server-mysql
   tag: latest
   pullPolicy: IfNotPresent
 
