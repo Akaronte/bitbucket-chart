@@ -22,23 +22,22 @@ service:
 #    memory: 512Mi
 #    cpu: 300m
 
-# livenessProbe:
-#   enabled: true
+livenessProbe:
+   enabled: false
 #   initialDelaySeconds: 180
 #   periodSeconds: 10
 #   timeoutSeconds: 180
 #   failureThreshold: 150
 #   successThreshold: 1
-# readinessProbe:
-#   enabled: true
+readinessProbe:
+   enabled: false
 #   initialDelaySeconds: 30
 #   periodSeconds: 10
 #   timeoutSeconds: 180
 #   failureThreshold: 60
 #   successThreshold: 1
-
- ingress:
-  enabled: true
+ingress:
+  enabled: false
   annotations: { "kubernetes.io/ingress.class": "nginx" , "kubernetes.io/tls-acme": "true" }
   # kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
@@ -62,4 +61,4 @@ persistence:
   enabled: true
   bitbucket:
     accessMode: ReadWriteOnce
-    size: 8Gi
+    size: 18Gi
